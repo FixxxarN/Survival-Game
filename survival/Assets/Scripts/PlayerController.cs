@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float jumpHeight = 5f;
@@ -13,9 +13,11 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded;
 
     private Rigidbody2D rigidbody;
+    private Animator anim;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -51,5 +53,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
         }
+
+        anim.SetFloat("Speed", Mathf.Abs(rigidbody.velocity.x));
+
+        if(rigidbody.velocity.x > 0)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        else if(rigidbody.velocity.x < 0)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
     }
 }
