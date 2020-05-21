@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float Health = 100f;
+
     public float movementSpeed = 5f;
     public float jumpHeight = 5f;
 
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rigidbody;
     private Animator anim;
+
+    public float YVelocity = 0.0f;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -33,9 +37,17 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && grounded)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpHeight);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Ground" && other.relativeVelocity.y > 10)
+        {
+            Health -= other.relativeVelocity.y * rigidbody.gravityScale * 1.5f;
         }
     }
 
@@ -43,11 +55,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            rigidbody.velocity = new Vector2(-movementSpeed, rigidbody.velocity.y);
+            if(Input.GetKey(KeyCode.LeftShift))
+                rigidbody.velocity = new Vector2(-movementSpeed * 2, rigidbody.velocity.y);
+            else
+                rigidbody.velocity = new Vector2(-movementSpeed, rigidbody.velocity.y);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+            if(Input.GetKey(KeyCode.LeftShift))
+                rigidbody.velocity = new Vector2(movementSpeed * 2, rigidbody.velocity.y);
+            else
+                rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
         }
         else
         {

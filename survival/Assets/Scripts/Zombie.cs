@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turtle : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
     public float MoveSpeed;
     public bool MoveRight;
 
     public bool Idle = false;
-    public bool Hidden = false;
+    public bool Attacking = false;
 
     public float Timer = 0.0f;
     public int Seconds;
@@ -27,13 +27,9 @@ public class Turtle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!Hidden)
-        {
-            RandomMovement();
-        }
-
+        RandomMovement();
         anim.SetBool("Idle", Idle);
-        anim.SetBool("Hidden", Hidden);
+        anim.SetBool("Attacking", Attacking);
 
         if (MoveRight)
         {
@@ -49,11 +45,18 @@ public class Turtle : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.name == "Player")
+        if (other.name == "Player")
         {
-            Hidden = true;
-            MoveSpeed = 0.0f;
-            Idle = true;
+            MoveSpeed = 1f;
+            Attacking = true;
+            if(other.transform.position.x < gameObject.transform.position.x)
+            {
+                MoveRight = false;
+            }
+            else
+            {
+                MoveRight = true;
+            }
         }
     }
 
@@ -61,7 +64,7 @@ public class Turtle : MonoBehaviour
     {
         if (other.name == "Player")
         {
-            Hidden = false;
+            Attacking = false;
         }
     }
 
@@ -70,7 +73,7 @@ public class Turtle : MonoBehaviour
         Timer += Time.deltaTime;
         Seconds = (int)(Timer % 60);
 
-        if(Seconds > 3)
+        if (Seconds > 3)
         {
             Timer = 0.0f;
             var random = Random.Range(0, 15);
@@ -79,7 +82,7 @@ public class Turtle : MonoBehaviour
                 Idle = true;
                 MoveSpeed = 0.0f;
             }
-            else if(random > 4 && random < 10)
+            else if (random > 4 && random < 10)
             {
                 Idle = false;
                 MoveSpeed = 0.2f;
