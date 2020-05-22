@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +9,29 @@ public class ChunksHandler : MonoBehaviour
     int chunkWidth;
     public int NumberOfChunks;
 
+    public CameraController CameraController;
+
     PerlinNoise noise;
     // Start is called before the first frame update
     void Start()
     {
+        CameraController = FindObjectOfType<CameraController>();
         chunkWidth = Chunk.GetComponent<ChunkGenerator>().maxX;
         noise = new PerlinNoise(Random.Range(1000000, 10000000));
         Generate();
     }
+
+    //void Update()
+    //{
+    //    DrawVisibleChunks();
+    //}
+
+    //public void DrawVisibleChunks()
+    //{
+    //    var camera = CameraController.gameObject;
+        
+    //    if()
+    //}
 
     public void Generate()
     {

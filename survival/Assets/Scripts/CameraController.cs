@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour
     {
         private PlayerController player;
 
