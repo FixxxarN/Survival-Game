@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         Jump();
+        Save();
+        Load();
     }
 
     void Jump()
@@ -78,5 +80,24 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1f, 1f, 1f);
         else if(rigidbody.velocity.x < 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    void Save()
+    {
+        if(Input.GetKeyDown(KeyCode.Insert))
+        {
+            var player = GetComponent<Player>();
+            SaveLoadManager.SavePlayer(player);
+        }
+    }
+
+    void Load()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            var playerData = SaveLoadManager.LoadPlayer();
+            var player = GetComponent<Player>();
+            player.Name = playerData.Name;
+        }
     }
 }

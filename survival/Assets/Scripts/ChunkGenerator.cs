@@ -17,8 +17,14 @@ public class ChunkGenerator : MonoBehaviour
 
     public PerlinNoise noise;
 
+    public List<GameObject> Blocks;
+
+    Ray ray;
+    RaycastHit hit;
+
     void Start()
     {
+        Blocks = new List<GameObject>();
         Generate();
     }
 
@@ -41,6 +47,7 @@ public class ChunkGenerator : MonoBehaviour
                 GameObject newTile = Instantiate(block, Vector2.zero, Quaternion.identity);
                 newTile.transform.parent = this.gameObject.transform;
                 newTile.transform.localPosition = new Vector2(i * 0.125f, j * 0.125f);
+                Blocks.Add(newTile);
             }
         }
     }

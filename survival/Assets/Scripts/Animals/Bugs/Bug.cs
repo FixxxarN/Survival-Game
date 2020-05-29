@@ -5,7 +5,9 @@ using UnityEngine;
 public class Bug : MonoBehaviour
 {
     protected float flyingSpeed;
+    protected bool alive = true;
     protected Rigidbody2D rigidbody;
+    protected Animator anim;
 
     // Start is called before the first frame update
     void Start()

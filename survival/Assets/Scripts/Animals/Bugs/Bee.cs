@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +10,51 @@ namespace Assets.Scripts.Animals.Bugs
 {
     public class Bee : Bug
     {
-        private bool Attacking = false;
+        private bool attacking = false;
 
         void Start()
         {
+            alive = true;
+            anim = GetComponent<Animator>();
             flyingSpeed = 0.5f;
             rigidbody = GetComponent<Rigidbody2D>();
         }
 
         void Update()
         {
-            if (Attacking == false)
+            anim.SetBool("alive", alive);
+            if (!attacking && alive)
                 Flying();
+
+            if (!alive)
+            {
+                rigidbody.gravityScale = 1;
+                StartCoroutine(Die());
+            }
+        }
+
+        private IEnumerator Die()
+        {
+            yield return new WaitForSeconds(2f);
+            Destroy(gameObject);
         }
 
         void OnTriggerStay2D(Collider2D other)
         {
+            if (other.gameObject.name == "Player" && alive)
+            {
+                attacking = true;
+                rigidbody.velocity = (other.transform.position - gameObject.transform.position).normalized * flyingSpeed * 2;
+            }
+        }
+
+        void OnCollisionEnter2D(Collision2D other)
+        {
             if (other.gameObject.name == "Player")
             {
-                Attacking = true;
-                rigidbody.velocity = (other.transform.position - gameObject.transform.position).normalized * flyingSpeed * 2;
+                other.gameObject.GetComponent<PlayerController>().Health -= 10;
+                attacking = false;
+                alive = false;
             }
         }
 
@@ -36,7 +62,7 @@ namespace Assets.Scripts.Animals.Bugs
         {
             if (other.gameObject.name == "Player")
             {
-                Attacking = false;
+                attacking = false;
             }
         }
     }

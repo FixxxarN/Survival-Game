@@ -573,6 +573,7 @@ MonoBehaviour:
   Chunk: {fileID: 3057292761946963201, guid: 55cad4496deede044bb6ab5743e5df59, type: 3}
   NumberOfChunks: 10
   CameraController: {fileID: 0}
+  Chunks: []
 --- !u!4 &1279366878
 Transform:
   m_ObjectHideFlags: 0
@@ -771,6 +772,7 @@ GameObject:
   - component: {fileID: 2103624188}
   - component: {fileID: 2103624190}
   - component: {fileID: 2103624191}
+  - component: {fileID: 2103624192}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -835,7 +837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103624185}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.02, y: 1.71, z: 0}
+  m_LocalPosition: {x: 3.11, y: 2.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1834085795}
@@ -929,3 +931,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2103624192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103624185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d3e040d9d9b4240a5eb4f9591bacad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Liz
+  Gender: Male
+  SkinColor: 2
+  Hair: 1
+  HairColor: 1
+  EyeColor: 1
