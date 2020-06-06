@@ -13,7 +13,7 @@ public class Turtle : MonoBehaviour
     public float Timer = 0.0f;
     public int Seconds;
 
-    private Rigidbody2D rigidbody;
+    private new Rigidbody2D rigidbody;
     private Animator anim;
 
 

@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            var playerData = SaveLoadManager.LoadPlayer();
+            var playerData = SaveLoadManager.LoadPlayer(1);
             var player = GetComponent<Player>();
             player.Name = playerData.Name;
         }

@@ -49,8 +49,13 @@ MonoBehaviour:
     type: 3}
   StonePrefab: {fileID: 7429656373168841407, guid: 27754e2ee5401af44a5bbfee9153919a,
     type: 3}
+  CoalPrefab: {fileID: 5630482785654188919, guid: aa263cc3220902248bddb6eee5a70548,
+    type: 3}
+  IronPrefab: {fileID: 6912269776416407721, guid: 554ceaea302dfbb43b45b6317cbef7f0,
+    type: 3}
   width: 0
   minX: -16
   maxX: 16
   minY: -16
   maxY: 16
+  Blocks: []

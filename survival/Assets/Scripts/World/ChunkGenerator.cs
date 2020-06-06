@@ -7,6 +7,8 @@ public class ChunkGenerator : MonoBehaviour
     public GameObject DirtPrefab;
     public GameObject GrassPrefab;
     public GameObject StonePrefab;
+    public GameObject CoalPrefab;
+    public GameObject IronPrefab;
 
     public int width;
 
@@ -42,7 +44,20 @@ public class ChunkGenerator : MonoBehaviour
 
                 if(j < minY + columnHeight - 6)
                 {
-                    block = StonePrefab;
+                    if (Random.Range(0, 200) <= 0)
+                    {
+                        if(Random.Range(0, 10) <= 0)
+                        {
+                            block = IronPrefab;
+                        }
+                        else
+                        {
+                            block = CoalPrefab;
+
+                        }
+                    }
+                    else
+                        block = StonePrefab;
                 }
                 GameObject newTile = Instantiate(block, Vector2.zero, Quaternion.identity);
                 newTile.transform.parent = this.gameObject.transform;
