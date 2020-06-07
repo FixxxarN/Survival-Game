@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Animal feces
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,37 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     public float YVelocity = 0.0f;
+
+    //[SerializeField]
+    //private UI_Inventory uiInventory;
+    public Inventory inventory;
+
+    void Awake()
+    {
+        //uiInventory.SetInventory(inventory);
+        //uiInventory.SetPlayer(this);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        //ItemWorld itemWorld = other.gameObject.GetComponent<ItemWorld>();
+        //if (itemWorld != null)
+        //{
+        //    inventory.AddItem(itemWorld.GetItem());
+        //    itemWorld.DestroySelf();
+        //}
+
+        if(other.gameObject.tag == "Item")
+        {
+            inventory.AddItem(other.gameObject.GetComponent<Item>());
+        }
+
+        if (other.gameObject.tag == "Ground" && other.relativeVelocity.y > 10)
+        {
+            Health -= other.relativeVelocity.y * rigidbody.gravityScale * 1.5f;
+        }
+    }
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -45,26 +77,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Ground" && other.relativeVelocity.y > 10)
-        {
-            Health -= other.relativeVelocity.y * rigidbody.gravityScale * 1.5f;
-        }
-    }
-
     void Movement()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            if(Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
                 rigidbody.velocity = new Vector2(-movementSpeed * 2, rigidbody.velocity.y);
             else
                 rigidbody.velocity = new Vector2(-movementSpeed, rigidbody.velocity.y);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            if(Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
                 rigidbody.velocity = new Vector2(movementSpeed * 2, rigidbody.velocity.y);
             else
                 rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
@@ -76,15 +100,15 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("Speed", Mathf.Abs(rigidbody.velocity.x));
 
-        if(rigidbody.velocity.x > 0)
+        if (rigidbody.velocity.x > 0)
             transform.localScale = new Vector3(1f, 1f, 1f);
-        else if(rigidbody.velocity.x < 0)
+        else if (rigidbody.velocity.x < 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);
     }
 
     void Save()
     {
-        if(Input.GetKeyDown(KeyCode.Insert))
+        if (Input.GetKeyDown(KeyCode.Insert))
         {
             var player = GetComponent<Player>();
             SaveLoadManager.SavePlayer(player);
@@ -93,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     void Load()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             var playerData = SaveLoadManager.LoadPlayer(1);
             var player = GetComponent<Player>();
