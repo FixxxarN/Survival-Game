@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 1437213365}
   - component: {fileID: 1437213364}
   - component: {fileID: 1437213368}
+  - component: {fileID: 1437213369}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -697,6 +698,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58db16e22f7dc743be6e78eb3dd5fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1437213369
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437213363}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &1817582761 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
@@ -941,6 +954,16 @@ PrefabInstance:
       propertyPath: EventSystem
       value: 
       objectReference: {fileID: 320742448}
+    - target: {fileID: 3374554207047978409, guid: 590a894e7de7bc94683c97e3292fa9fb,
+        type: 3}
+      propertyPath: CanvasGroup
+      value: 
+      objectReference: {fileID: 1437213369}
+    - target: {fileID: 3374554207047978409, guid: 590a894e7de7bc94683c97e3292fa9fb,
+        type: 3}
+      propertyPath: FadeTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -999,22 +1022,22 @@ PrefabInstance:
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 33.200684
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70.20032
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 48
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 48
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3374554207047978412, guid: 590a894e7de7bc94683c97e3292fa9fb,
         type: 3}

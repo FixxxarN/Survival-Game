@@ -35,11 +35,19 @@ public class Inventory : MonoBehaviour
 
     private float hoverYOffset;
 
+    private static CanvasGroup canvasGroup;
+
+    public static CanvasGroup CanvasGroup { get => canvasGroup; }
+
+    private bool fadingIn, fadingOut;
+
+    public float FadeTime;
 
     public static int EmptySlots { get => emptySlots; set => emptySlots = value; }
 
     void Start()
     {
+        canvasGroup = transform.parent.GetComponent<CanvasGroup>();
         CreateLayout();
     }
 
@@ -55,7 +63,7 @@ public class Inventory : MonoBehaviour
                 Destroy(GameObject.Find("Hover"));
                 to = null;
                 from = null;
-                hoverObject = null;
+                emptySlots++;
             }
         }
         if(hoverObject != null)
@@ -65,6 +73,18 @@ public class Inventory : MonoBehaviour
 
             hoverObject.transform.position = Input.mousePosition;
 
+        }
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            if(canvasGroup.alpha > 0)
+            {
+                StartCoroutine("FadeOut");
+                PutItemBack();
+            }
+            else
+            {
+                StartCoroutine("FadeIn");
+            }
         }
     }
 
@@ -158,7 +178,7 @@ public class Inventory : MonoBehaviour
 
     public void MoveItem(GameObject clicked)
     {
-        if(from == null)
+        if(from == null && canvasGroup.alpha == 1)
         {
             if(!clicked.GetComponent<Slot>().IsEmpty)
             {
@@ -202,7 +222,71 @@ public class Inventory : MonoBehaviour
             from.GetComponent<Image>().color = Color.white;
             to = null;
             from = null;
-            hoverObject = null;
+            Destroy(GameObject.Find("Hover"));
         }
     }
+
+    private void PutItemBack()
+    {
+        if(from != null)
+        {
+            Destroy(GameObject.Find("Hover"));
+            from.GetComponent<Image>().color = Color.white;
+            from = null;
+        }
+    }
+
+    private IEnumerator FadeOut()
+    {
+        if(!fadingOut)
+        {
+            fadingOut = true;
+            fadingIn = false;
+            StopCoroutine("FadeIn");
+
+            float startAlpha = canvasGroup.alpha;
+            float rate = 1.0f / FadeTime;
+            float progress = 0.0f;
+
+            while(progress < 1.0)
+            {
+                canvasGroup.alpha = Mathf.Lerp(startAlpha, 0, progress);
+
+                progress += rate * Time.deltaTime;
+
+                yield return null;
+            }
+
+            canvasGroup.alpha = 0;
+            fadingOut = false;
+        }
+    }
+
+    private IEnumerator FadeIn()
+    {
+        if (!fadingIn)
+        {
+            fadingOut = false;
+            fadingIn = true;
+            StopCoroutine("FadeOut");
+
+            float startAlpha = canvasGroup.alpha;
+            float rate = 1.0f / FadeTime;
+            float progress = 0.0f;
+
+            while (progress < 1.0)
+            {
+                canvasGroup.alpha = Mathf.Lerp(startAlpha, 1, progress);
+
+                progress += rate * Time.deltaTime;
+
+                yield return null;
+            }
+
+            canvasGroup.alpha = 1;
+            fadingIn = false;
+        }
+    }
+
+
 }
