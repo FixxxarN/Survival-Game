@@ -43,10 +43,25 @@ public class Inventory : MonoBehaviour
 
     public float FadeTime;
 
+    private static GameObject tooltip;
+
+    public GameObject ToolTip;
+
+    private static Text sizeText;
+
+    public Text SizeTextObject;
+
+    private static Text visualText;
+
+    public Text VisualTextObject;
+
     public static int EmptySlots { get => emptySlots; set => emptySlots = value; }
 
     void Start()
     {
+        tooltip = ToolTip;
+        sizeText = SizeTextObject;
+        visualText = VisualTextObject;
         canvasGroup = transform.parent.GetComponent<CanvasGroup>();
         CreateLayout();
     }
@@ -86,6 +101,42 @@ public class Inventory : MonoBehaviour
                 StartCoroutine("FadeIn");
             }
         }
+        //if(Input.GetMouseButton(0))
+        //{
+        //    if(EventSystem.IsPointerOverGameObject(-1))
+        //    {
+        //        MoveInventory();
+        //    }
+        //}
+    }
+
+    //private void MoveInventory()
+    //{
+    //    transform.position = new Vector3(Input.mousePosition.x - (inventoryRect.sizeDelta.x / 2 * Canvas.scaleFactor), Input.mousePosition.y + (inventoryRect.sizeDelta.y / 2 * Canvas.scaleFactor));
+    //}
+
+    public void ShowTooltip(GameObject slot)
+    {
+        Slot tempSlot = slot.GetComponent<Slot>();
+
+        if(!tempSlot.IsEmpty && hoverObject == null)
+        {
+            visualText.text = tempSlot.CurrenItem.GetTooltip();
+            sizeText.text = visualText.text;
+
+            tooltip.SetActive(true);
+
+            float xPos = slot.transform.position.x + slotPaddingLeft;
+            float yPos = slot.transform.position.y - slot.GetComponent<RectTransform>().sizeDelta.y - slotPaddingTop;
+
+            tooltip.transform.position = new Vector2(xPos, yPos);
+        }
+
+    }
+
+    public void HideTooltip()
+    {
+        tooltip.SetActive(false);
     }
 
     void CreateLayout()
@@ -115,9 +166,9 @@ public class Inventory : MonoBehaviour
                 RectTransform slotRect = newSlot.GetComponent<RectTransform>();
 
                 newSlot.name = "Slot";
-                newSlot.transform.SetParent(this.transform.parent);
+                newSlot.transform.SetParent(this.transform);
 
-                slotRect.localPosition = inventoryRect.localPosition + new Vector3(slotPaddingLeft * (x + 1) + (SlotSize * x), -slotPaddingTop * (y + 1) - (SlotSize * y));
+                slotRect.localPosition = new Vector3(slotPaddingLeft * (x + 1) + (SlotSize * x), -slotPaddingTop * (y + 1) - (SlotSize * y));
 
                 slotRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, SlotSize);
                 slotRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, SlotSize);
