@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Assets.Scripts.World;
 
 public static class SaveLoadManager
 {
@@ -72,12 +73,59 @@ public static class SaveLoadManager
             Directory.CreateDirectory(Application.persistentDataPath + "/Worlds");
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream stream = new FileStream(Application.persistentDataPath + "/Worlds/" + "[World.Name]" + ".data", FileMode.Create);
+        FileStream stream = new FileStream(Application.persistentDataPath + "/Worlds/" + world.Id + ".data", FileMode.Create);
 
         WorldData data = new WorldData(world);
 
         bf.Serialize(stream, data);
         stream.Close();
+    }
+
+    public static List<WorldData> GetWorlds()
+    {
+        if (!Directory.Exists(Application.persistentDataPath + "/Worlds"))
+            Directory.CreateDirectory(Application.persistentDataPath + "/Worlds");
+
+        List<WorldData> data = new List<WorldData>();
+
+        for (int i = 0; i < Directory.GetFiles(Application.persistentDataPath + "/Worlds").Length; i++)
+        {
+            if (File.Exists(Application.persistentDataPath + "/Worlds/" + i + ".data"))
+            {
+                data.Add(LoadWorld(i));
+            }
+        }
+        return data;
+    }
+
+    public static WorldData LoadWorld(int i)
+    {
+        if (File.Exists(Application.persistentDataPath + "/Worlds/" + i + ".data"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream stream = new FileStream(Application.persistentDataPath + "/Worlds/" + i + ".data", FileMode.Open);
+
+            WorldData data = bf.Deserialize(stream) as WorldData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.LogError("File does not exist");
+            return new WorldData(new World());
+        }
+    }
+
+    public static void RemoveWorld(int i)
+    {
+        if (File.Exists(Application.persistentDataPath + "/Worlds/" + i + ".data"))
+        {
+            File.Delete(Application.persistentDataPath + "/Worlds/" + i + ".data");
+        }
+        else
+        {
+            Debug.LogError("File does not exist");
+        }
     }
 }
 
@@ -109,9 +157,14 @@ public class WorldData
 {
     public int Id;
     public string Name;
+    public string Size;
+    public Chunk[,] Chunks;
 
     public WorldData(World world)
     {
-
+        Id = world.Id;
+        Name = world.Name;
+        Size = world.Size;
+        Chunks = world.Chunks;
     }
 }

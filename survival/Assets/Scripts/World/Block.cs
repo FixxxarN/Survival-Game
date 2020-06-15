@@ -2,14 +2,17 @@
 
 namespace Assets.Scripts
 {
+    public enum BlockType
+    {
+        Grass,
+        Dirt,
+        Stone,
+        Coal,
+        Iron
+    }
+
     public class Block : MonoBehaviour
     {
-        void OnMouseEnter()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Destroy(gameObject);
-            }
-        }
+        public BlockType BlockType;
     }
 }

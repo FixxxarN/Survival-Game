@@ -20,28 +20,14 @@ public class PlayerController : MonoBehaviour
 
     public float YVelocity = 0.0f;
 
-    //[SerializeField]
-    //private UI_Inventory uiInventory;
     public Inventory inventory;
-
-    void Awake()
-    {
-        //uiInventory.SetInventory(inventory);
-        //uiInventory.SetPlayer(this);
-    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        //ItemWorld itemWorld = other.gameObject.GetComponent<ItemWorld>();
-        //if (itemWorld != null)
-        //{
-        //    inventory.AddItem(itemWorld.GetItem());
-        //    itemWorld.DestroySelf();
-        //}
-
         if(other.gameObject.tag == "Item")
         {
             inventory.AddItem(other.gameObject.GetComponent<Item>());
+            //Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "Ground" && other.relativeVelocity.y > 10)

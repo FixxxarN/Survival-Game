@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -111,6 +110,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         if(eventData.button == PointerEventData.InputButton.Right && !GameObject.Find("Hover") && Inventory.CanvasGroup.alpha > 0)
         {
             UseItem();
+        }
+        if(eventData.button == PointerEventData.InputButton.Right && GameObject.Find("Hover") && Inventory.CanvasGroup.alpha > 0) {
+            if(Inventory.from.Items.Count > 1)
+                AddItem(Inventory.from.Items.Pop());
         }
     }
 }

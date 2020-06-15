@@ -19,9 +19,9 @@ public class Inventory : MonoBehaviour
 
     public GameObject slotPrefab;
 
-    private static Slot from, to;
+    public static Slot from, to;
 
-    private List<GameObject> allSlots;
+    protected List<GameObject> allSlots;
 
     public GameObject iconPrefab;
 
@@ -32,8 +32,6 @@ public class Inventory : MonoBehaviour
     public Canvas Canvas;
 
     public EventSystem EventSystem;
-
-    private float hoverYOffset;
 
     private static CanvasGroup canvasGroup;
 
@@ -57,13 +55,17 @@ public class Inventory : MonoBehaviour
 
     public static int EmptySlots { get => emptySlots; set => emptySlots = value; }
 
+    void Awake()
+    {
+        CreateLayout();
+    }
+
     void Start()
     {
         tooltip = ToolTip;
         sizeText = SizeTextObject;
         visualText = VisualTextObject;
         canvasGroup = transform.parent.GetComponent<CanvasGroup>();
-        CreateLayout();
     }
 
     
@@ -74,6 +76,12 @@ public class Inventory : MonoBehaviour
             if(!EventSystem.IsPointerOverGameObject(-1) && from != null)
             {
                 from.GetComponent<Image>().color = Color.white;
+                foreach(Item item in from.Items)
+                {
+                    //Fixa med playerLocalScale for o veta om han är vänd åt höger eller vänster i både AddForce och instansen
+                    Item tempItem = Instantiate(item, GameObject.Find("Player").transform.position + new Vector3(0.2f, 0, 0), Quaternion.identity);
+                    tempItem.GetComponent<Rigidbody2D>().AddForce(transform.right * 1f, ForceMode2D.Impulse);
+                }
                 from.ClearSlot();
                 Destroy(GameObject.Find("Hover"));
                 to = null;
@@ -142,8 +150,6 @@ public class Inventory : MonoBehaviour
     void CreateLayout()
     {
         allSlots = new List<GameObject>();
-
-        hoverYOffset = 1000;
 
         EmptySlots = Slots;
 
@@ -338,6 +344,4 @@ public class Inventory : MonoBehaviour
             fadingIn = false;
         }
     }
-
-
 }

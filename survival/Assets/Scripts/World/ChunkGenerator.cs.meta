@@ -3,7 +3,17 @@ guid: 3b9eff8141b87e5478e853742cb3b09d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - DirtPrefab: {fileID: 8491330324949224472, guid: f845c93758e541145abc2fd7863c82ac,
+      type: 3}
+  - GrassPrefab: {fileID: 7698971584275496905, guid: f2631c6c27637424d91ac453d3d263f1,
+      type: 3}
+  - StonePrefab: {fileID: 7429656373168841407, guid: 27754e2ee5401af44a5bbfee9153919a,
+      type: 3}
+  - CoalPrefab: {fileID: 5630482785654188919, guid: aa263cc3220902248bddb6eee5a70548,
+      type: 3}
+  - IronPrefab: {fileID: 6912269776416407721, guid: 554ceaea302dfbb43b45b6317cbef7f0,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

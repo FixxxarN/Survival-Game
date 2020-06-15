@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 7655095ecf8a2304a88b727c78fa1ce5
+guid: ea328125d4ee3fa41918f3e8dc40e37f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Chunk: {fileID: 3057292761946963201, guid: 55cad4496deede044bb6ab5743e5df59, type: 3}
-  - CameraController: {instanceID: 0}
   - DirtPrefab: {fileID: 8491330324949224472, guid: f845c93758e541145abc2fd7863c82ac,
       type: 3}
   - GrassPrefab: {fileID: 7698971584275496905, guid: f2631c6c27637424d91ac453d3d263f1,
