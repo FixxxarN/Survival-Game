@@ -13,6 +13,7 @@ public class CharacterSelection : MonoBehaviour
 
     private GameObject charactersText;
     private RectTransform charactersTextRect;
+    public GameObject Characters;
 
     void Awake()
     {
@@ -23,12 +24,12 @@ public class CharacterSelection : MonoBehaviour
 
     void Start()
     {
-        int i = 1;
+        int i = 0;
         foreach(PlayerData character in characters)
         {
 
-            GameObject characterSelectionBox = (GameObject)Instantiate(CharacterSelectionBox, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
-            characterSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, charactersTextRect.anchoredPosition.y - 100 * i - (i > 1 ? 50 : 0), 0);
+            GameObject characterSelectionBox = (GameObject)Instantiate(CharacterSelectionBox, new Vector3(0, 0, 0), Quaternion.identity, Characters.gameObject.transform);
+            characterSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, charactersTextRect.anchoredPosition.y - 50 - (i > 0 ? i * 150 : 0), 0);
             characterSelectionBox.GetComponent<CharacterSelectionBox>().characterId = character.Id;
             CharacterSelectionBoxBody body = characterSelectionBox.GetComponentInChildren<CharacterSelectionBoxBody>();
             CharacterSelectionBoxHair hair = characterSelectionBox.GetComponentInChildren<CharacterSelectionBoxHair>();

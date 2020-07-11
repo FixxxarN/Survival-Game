@@ -12,6 +12,7 @@ public class WorldSelection : MonoBehaviour
 
     private GameObject worldsText;
     private RectTransform worldsTextRect;
+    public GameObject WorldsContainer;
 
     void Awake()
     {
@@ -23,11 +24,11 @@ public class WorldSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int multiplier = 1;
+        int multiplier = 0;
         for(int i = 0; i < worlds.Count; i++)
         {
-            GameObject worldSelectionBox = (GameObject)Instantiate(WorldSelectionBox, new Vector3(0, 0, 0), Quaternion.identity, gameObject.transform);
-            worldSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, worldsTextRect.anchoredPosition.y - 500 * multiplier - (multiplier > 1 ? 50 : 0), 0);
+            GameObject worldSelectionBox = (GameObject)Instantiate(WorldSelectionBox, new Vector3(0, 0, 0), Quaternion.identity, WorldsContainer.gameObject.transform);
+            worldSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, worldsTextRect.anchoredPosition.y - 50 - (multiplier > 0 ? i * 150 : 0), 0);
             worldSelectionBox.GetComponent<WorldSelectionBox>().worldId = worlds[i].Id;
             Text text = worldSelectionBox.GetComponentInChildren<Text>();
             text.text = worlds[i].Name;
