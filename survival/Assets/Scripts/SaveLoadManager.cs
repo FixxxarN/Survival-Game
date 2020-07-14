@@ -159,6 +159,8 @@ public class WorldData
     public string Name;
     public string Size;
     public Chunk[,] Chunks;
+    public float PlayerPositionX;
+    public float PlayerPositionY;
 
     public WorldData(World world)
     {
@@ -166,5 +168,7 @@ public class WorldData
         Name = world.Name;
         Size = world.Size;
         Chunks = world.Chunks;
+        PlayerPositionX = world.PlayerPositionX;
+        PlayerPositionY = world.PlayerPositionY;
     }
 }

@@ -457,8 +457,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 554909757}
   m_HandleRect: {fileID: 554909756}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.41148803
+  m_Value: 1.0000001
+  m_Size: 0.4027529
   m_NumberOfSteps: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -686,7 +686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748013216}
   m_Layer: 5
-  m_Name: Worlds
+  m_Name: W
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,8 +708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -19, y: -1095.0499}
-  m_SizeDelta: {x: 481.1, y: 2190.1}
+  m_AnchoredPosition: {x: -19, y: -1118.8}
+  m_SizeDelta: {x: 481.1, y: 2237.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &988858128
 GameObject:
@@ -1152,4 +1152,4 @@ MonoBehaviour:
   WorldSelectionBox: {fileID: 640273720069420871, guid: b20f700ebc5d8764692668d6cdb4e709,
     type: 3}
   worlds: []
-  Worlds: {fileID: 748013215}
+  WorldsContainer: {fileID: 748013215}

@@ -9,6 +9,8 @@ public class World
 	public string Name;
 	public string Size;
 	public Chunk[,] Chunks;
+	public float PlayerPositionX;
+	public float PlayerPositionY;
 
 	public World()
 	{

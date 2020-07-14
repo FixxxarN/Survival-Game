@@ -33,6 +33,16 @@ namespace Assets.Scripts.Menu.WorldSelection
 
         public void SelectWorld()
         {
+            WorldGenerator.world = new global::World()
+            {
+                Id = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).Id,
+                Name = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).Name,
+                Size = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).Size,
+                Chunks = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).Chunks,
+                PlayerPositionX = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).PlayerPositionX,
+                PlayerPositionY = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).PlayerPositionY
+            };
+
             WorldGenerator.chunks = worldSelection.worlds.FirstOrDefault(w => w.Id == worldId).Chunks;
             SceneManager.LoadScene("Ingame");
         }

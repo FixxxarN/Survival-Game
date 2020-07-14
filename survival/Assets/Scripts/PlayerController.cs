@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.World;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float YVelocity = 0.0f;
 
     public Inventory inventory;
+    private ChunksHandler chunksHandler;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameObject.transform.position = new Vector3(WorldGenerator.world.PlayerPositionX, WorldGenerator.world.PlayerPositionY, 0);
+        chunksHandler = FindObjectOfType<ChunksHandler>();
         rigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -53,6 +58,50 @@ public class PlayerController : MonoBehaviour
         Jump();
         Save();
         Load();
+        RemoveBlock();
+        PlaceBlock();
+    }
+
+    private void PlaceBlock()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit2d = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            AddBlockInWorld(mousePosition);
+            Instantiate(chunksHandler.IronPrefab, new Vector3((float)Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8, (float)Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8, 0), Quaternion.identity);
+        }
+    }
+
+    private void RemoveBlock()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Vector3 c = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit2d = Physics2D.Raycast(c, Vector2.zero);
+
+            if(hit2d)
+            {
+                if(hit2d.collider.CompareTag("Block"))
+                {
+                    RemoveBlockInWorld(c);
+                    Destroy(hit2d.collider.gameObject);
+                }
+            }
+        }
+    }
+
+    private void AddBlockInWorld(Vector3 mousePosition)
+    {
+        WorldGenerator.AddBlock(mousePosition);
+    }
+
+    private void RemoveBlockInWorld(Vector3 mousePosition)
+    {
+        WorldGenerator.RemoveBlock(mousePosition);
     }
 
     void Jump()

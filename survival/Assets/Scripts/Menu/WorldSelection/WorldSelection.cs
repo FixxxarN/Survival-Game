@@ -28,7 +28,7 @@ public class WorldSelection : MonoBehaviour
         for(int i = 0; i < worlds.Count; i++)
         {
             GameObject worldSelectionBox = (GameObject)Instantiate(WorldSelectionBox, new Vector3(0, 0, 0), Quaternion.identity, WorldsContainer.gameObject.transform);
-            worldSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, worldsTextRect.anchoredPosition.y - 50 - (multiplier > 0 ? i * 150 : 0), 0);
+            worldSelectionBox.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, worldsTextRect.anchoredPosition.y - 50 - (multiplier > 0 ? multiplier * 150 : 0), 0);
             worldSelectionBox.GetComponent<WorldSelectionBox>().worldId = worlds[i].Id;
             Text text = worldSelectionBox.GetComponentInChildren<Text>();
             text.text = worlds[i].Name;
