@@ -89,9 +89,10 @@ namespace Assets.Scripts.World
                         chunks[i, j].y + 4 > mousePosition.y &&
                         chunks[i, j].y < mousePosition.y)
                     {
-                        Debug.Log(Math.Round(mousePosition.x * 8 / 64 - 1, MidpointRounding.AwayFromZero));
-                        Debug.Log(Math.Round(mousePosition.y * 8 / -8, MidpointRounding.AwayFromZero));
-                        chunks[i, j].blocks[(int)Math.Round(mousePosition.x * 8 / chunks[i, j].x, MidpointRounding.AwayFromZero), (int)Math.Round(mousePosition.y * 8 / chunks[i, j].y, MidpointRounding.AwayFromZero)] = 5;
+                        var x = ((Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8) == 32 ? 0 : (Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8;
+                        var y = ((Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) *8) == 32 ? 0 : (Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) * 8;
+
+                        chunks[i, j].blocks[(int)x, (int)y] = 5;
                     }
                 }
             }
@@ -99,15 +100,34 @@ namespace Assets.Scripts.World
 
         public static void RemoveBlock(Vector3 mousePosition)
         {
+            for (int i = 0; i < chunks.GetLength(0); i++)
+            {
+                for (int j = 0; j < chunks.GetLength(1); j++)
+                {
+                    if (chunks[i, j].x + 4 > mousePosition.x &&
+                        chunks[i, j].x < mousePosition.x &&
+                        chunks[i, j].y + 4 > mousePosition.y &&
+                        chunks[i, j].y < mousePosition.y)
+                    {
+                        var x = ((Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8) == 32 ? 0 : (Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8;
+                        var y = ((Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) * 8) == 32 ? 0 : (Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) * 8;
 
+                        chunks[i, j].blocks[(int)x, (int)y] = 0;
+                    }
+                }
+            }
         }
 
         public static void SaveWorld()
         {
-            world.Id = SaveLoadManager.GetWorlds().Count;
+            global::World world = new global::World();
+
+            world.Id = 0;
             world.Name = Name;
             world.Size = Size;
             world.Chunks = chunks;
+            world.PlayerPositionX = 0;
+            world.PlayerPositionY = 0;
 
             SaveLoadManager.SaveWorld(world);
         }
