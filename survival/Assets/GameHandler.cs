@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
+        InvokeRepeating("SaveWorld", 300, 300);
     }
 
     // Update is called once per frame
@@ -17,15 +18,21 @@ public class GameHandler : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            WorldGenerator.world.PlayerPositionX = player.transform.position.x;
-            WorldGenerator.world.PlayerPositionY = player.transform.position.y;
-            WorldGenerator.world.Chunks = WorldGenerator.chunks;
-            SaveWorld(WorldGenerator.world);
+            SaveWorld();
         }
     }
 
-    private void SaveWorld(World world)
+    void OnApplicationQuit()
     {
-        SaveLoadManager.SaveWorld(world);
+        
+        SaveWorld();
+    }
+
+    private void SaveWorld()
+    {
+        WorldGenerator.world.PlayerPositionX = player.transform.position.x;
+        WorldGenerator.world.PlayerPositionY = player.transform.position.y;
+        WorldGenerator.world.Chunks = WorldGenerator.chunks;
+        SaveLoadManager.SaveWorld(WorldGenerator.world);
     }
 }

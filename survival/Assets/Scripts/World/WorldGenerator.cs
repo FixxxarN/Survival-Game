@@ -19,6 +19,7 @@ namespace Assets.Scripts.World
 
         static WorldGenerator()
         {
+            world = new global::World();
         }
 
         private static int GetWorldSize(string size)
@@ -120,8 +121,6 @@ namespace Assets.Scripts.World
 
         public static void SaveWorld()
         {
-            global::World world = new global::World();
-
             world.Id = 0;
             world.Name = Name;
             world.Size = Size;
