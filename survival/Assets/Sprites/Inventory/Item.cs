@@ -7,7 +7,12 @@ public enum ItemType
     Book,
     CreatureCatcher,
     Soda,
-    Chocolate
+    Chocolate,
+    GrassBlock,
+    DirtBlock,
+    StoneBlock,
+    CoalBlock,
+    IronBlock
 }
 
 public enum ItemQuality
@@ -21,6 +26,8 @@ public enum ItemQuality
 
 public class Item : MonoBehaviour
 {
+    public int Id;
+
     public ItemType Type;
 
     public ItemQuality Quality;

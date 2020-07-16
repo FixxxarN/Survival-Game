@@ -79,7 +79,7 @@ namespace Assets.Scripts.World
             }
         }
 
-        public static void AddBlock(Vector3 mousePosition)
+        public static void AddBlock(Vector3 mousePosition, int blockType)
         {
             for(int i = 0; i < chunks.GetLength(0); i++)
             {
@@ -93,7 +93,7 @@ namespace Assets.Scripts.World
                         var x = ((Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8) == 32 ? 0 : (Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].x) * 8;
                         var y = ((Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) *8) == 32 ? 0 : (Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8 - chunks[i, j].y) * 8;
 
-                        chunks[i, j].blocks[(int)x, (int)y] = 5;
+                        chunks[i, j].blocks[(int)x, (int)y] = blockType + 1;
                     }
                 }
             }

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2572007921527785307}
   - component: {fileID: -5090872997212668455}
   - component: {fileID: -104548302704246452}
-  - component: {fileID: -8035609998691420675}
+  - component: {fileID: -3647517090994201636}
+  - component: {fileID: 7685386590496837461}
   m_Layer: 8
   m_Name: Grass
   m_TagString: Block
@@ -114,7 +115,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockType: 0
---- !u!61 &-8035609998691420675
+--- !u!114 &-3647517090994201636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7698971584275496905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0fa0dab9e00d429ecfd9d975f6387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 4
+  Quality: 0
+  InventorySprite: {fileID: 21300000, guid: 45ce9c3daa399494496c1937f7965581, type: 3}
+  WorldPrefab: {fileID: 7698971584275496905}
+  MaxSize: 64
+  Strength: 0
+  Intellect: 0
+  Agility: 0
+  Stamina: 0
+  ItemName: Grass block
+  Description: :)
+--- !u!61 &7685386590496837461
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,9 +1,11 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.World;
+using Assets.Sprites.Inventory;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public float YVelocity = 0.0f;
 
     public Inventory inventory;
+    public Hotbar hotbar;
+    public InventoryHandler inventoryHandler;
     private ChunksHandler chunksHandler;
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        inventoryHandler = new InventoryHandler();
         gameObject.transform.position = new Vector3(WorldGenerator.world.PlayerPositionX, WorldGenerator.world.PlayerPositionY, 0);
         chunksHandler = FindObjectOfType<ChunksHandler>();
         rigidbody = GetComponent<Rigidbody2D>();
@@ -70,8 +75,12 @@ public class PlayerController : MonoBehaviour
 
             RaycastHit2D hit2d = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-            AddBlockInWorld(mousePosition);
-            Instantiate(chunksHandler.IronPrefab, new Vector3((float)Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8, (float)Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8, 0), Quaternion.identity);
+            if(!hotbar.selectedSlot.GetComponent<Slot>().IsEmpty)
+            {
+                Instantiate(GameObject.Find("ItemList").GetComponent<ItemsList>().Items[hotbar.selectedSlot.GetComponent<Slot>().Items.Peek().Id], new Vector3((float)Math.Round(mousePosition.x * 8, MidpointRounding.AwayFromZero) / 8, (float)Math.Round(mousePosition.y * 8, MidpointRounding.AwayFromZero) / 8, 0), Quaternion.identity);
+                AddBlockInWorld(mousePosition, hotbar.selectedSlot.GetComponent<Slot>().Items.Peek().Id);
+                hotbar.selectedSlot.GetComponent<Slot>().UseItem();
+            }
         }
     }
 
@@ -87,6 +96,8 @@ public class PlayerController : MonoBehaviour
             {
                 if(hit2d.collider.CompareTag("Block"))
                 {
+                    Item blockItem = hit2d.collider.gameObject.GetComponent<Item>();
+                    inventory.AddItem(blockItem);
                     RemoveBlockInWorld(c);
                     Destroy(hit2d.collider.gameObject);
                 }
@@ -94,9 +105,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void AddBlockInWorld(Vector3 mousePosition)
+    private void AddBlockInWorld(Vector3 mousePosition, int blockType)
     {
-        WorldGenerator.AddBlock(mousePosition);
+        WorldGenerator.AddBlock(mousePosition, blockType);
     }
 
     private void RemoveBlockInWorld(Vector3 mousePosition)

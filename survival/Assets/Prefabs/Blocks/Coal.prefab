@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 365396330668570720}
   - component: {fileID: 1062730983509263233}
   - component: {fileID: 6866890603021426650}
-  - component: {fileID: -5950712854383122468}
-  m_Layer: 0
+  - component: {fileID: -8777871844078268563}
+  - component: {fileID: 8487145567553939332}
+  - component: {fileID: -6910400574546590462}
+  m_Layer: 8
   m_Name: Coal
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -95,7 +97,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockType: 3
---- !u!61 &-5950712854383122468
+--- !u!114 &-8777871844078268563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630482785654188919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cba0fa0dab9e00d429ecfd9d975f6387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 3
+  Type: 7
+  Quality: 0
+  InventorySprite: {fileID: 21300000, guid: 8def0f229d20863428045c4555980824, type: 3}
+  WorldPrefab: {fileID: 5630482785654188919}
+  MaxSize: 64
+  Strength: 0
+  Intellect: 0
+  Agility: 0
+  Stamina: 0
+  ItemName: Coal block
+  Description: :(
+--- !u!68 &8487145567553939332
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630482785654188919}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.063}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.0625, y: 0}
+  - {x: 0.0625, y: 0}
+--- !u!61 &-6910400574546590462
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

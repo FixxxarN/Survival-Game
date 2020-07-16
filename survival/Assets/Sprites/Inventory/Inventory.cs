@@ -94,7 +94,7 @@ public class Inventory : MonoBehaviour
             Vector2 position;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(Canvas.GetComponent<RectTransform>(), Input.mousePosition, Canvas.worldCamera, out position);
 
-            hoverObject.transform.position = Input.mousePosition;
+            hoverObject.transform.position = new Vector2(Input.mousePosition.x + 10, Input.mousePosition.y - 10);
 
         }
         if(Input.GetKeyDown(KeyCode.B))
