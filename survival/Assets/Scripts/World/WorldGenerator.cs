@@ -121,7 +121,7 @@ namespace Assets.Scripts.World
 
         public static void SaveWorld()
         {
-            world.Id = 0;
+            world.Id = SaveLoadManager.GetWorlds().Count;
             world.Name = Name;
             world.Size = Size;
             world.Chunks = chunks;

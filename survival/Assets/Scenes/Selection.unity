@@ -202,8 +202,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 956525183}
-        m_MethodName: HostGame
+      - m_Target: {fileID: 956525182}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -331,8 +331,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 956525183}
-        m_MethodName: JoinGame
+      - m_Target: {fileID: 956525182}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -538,14 +538,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 956525183}
-        m_MethodName: Back
-        m_Mode: 1
+        m_MethodName: NavigateToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &597021261
@@ -613,7 +613,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 956525182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c97bd9d287e3b64fa59eb8b0bc4d4c1, type: 3}
+  m_Script: {fileID: 11500000, guid: e67a5d506b6b9cf429435d2dc8656f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &956525184
@@ -1002,14 +1002,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 956525183}
-        m_MethodName: SinglePlayer
-        m_Mode: 1
+        m_MethodName: NavigateToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CharacterSelection
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1857502351

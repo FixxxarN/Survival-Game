@@ -3,7 +3,11 @@ guid: 0f570cfb9f8a7dd47becefba6673b84c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - groundCheck: {instanceID: 0}
+  - inventory: {fileID: -1884751144720201914, guid: 590a894e7de7bc94683c97e3292fa9fb,
+      type: 3}
+  - hotbar: {fileID: 790605175596189280, guid: cf349e7a10cbd574f8126f34e19acf07, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

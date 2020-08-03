@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 4249163158032248527}
   - component: {fileID: 8915841214656213642}
   - component: {fileID: 4874972630378162538}
-  - component: {fileID: 5364637511366346473}
+  - component: {fileID: 8602546306017671651}
   m_Layer: 5
   m_Name: Hair
   m_TagString: Untagged
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5364637511366346473
+--- !u!114 &8602546306017671651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 58534710750651138}
   - component: {fileID: 911750372463002598}
   - component: {fileID: 7918528047536056131}
-  - component: {fileID: 7612576754158250642}
+  - component: {fileID: 4857571949180946607}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7612576754158250642
+--- !u!114 &4857571949180946607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -596,8 +596,8 @@ MonoBehaviour:
   Male: {fileID: 21300000, guid: 835eb16c6bcb95a428e2697b64c5187a, type: 3}
   Female: {fileID: 21300000, guid: 5a32afa37a28bcf4b9f095b19e586fb8, type: 3}
   Sprites:
-  - {fileID: 21300000, guid: 835eb16c6bcb95a428e2697b64c5187a, type: 3}
-  - {fileID: 21300000, guid: 5a32afa37a28bcf4b9f095b19e586fb8, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   SkinColors: []
   image: {fileID: 0}
   selectedGender: 0

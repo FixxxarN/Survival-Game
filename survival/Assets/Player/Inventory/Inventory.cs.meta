@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: e2db16d419f65d44890a5f9a046a8049
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - slotPrefab: {fileID: 5727660426846930685, guid: 2489bb7e57a8a0e43a93f4ce2f79d003,
+      type: 3}
+  - iconPrefab: {fileID: 5727660426846930685, guid: 1ccb79800a554394193387dda25877b3,
+      type: 3}
+  - Canvas: {instanceID: 0}
+  - EventSystem: {instanceID: 0}
+  - ToolTip: {instanceID: 0}
+  - SizeTextObject: {instanceID: 0}
+  - VisualTextObject: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
