@@ -13,9 +13,8 @@ public static class SaveLoadManager
         if (!Directory.Exists(Application.persistentDataPath + "/Characters"))
             Directory.CreateDirectory(Application.persistentDataPath + "/Characters");
 
-        int id = GetPlayers().Count;
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream stream = new FileStream(Application.persistentDataPath + "/Characters/" + id + ".data", FileMode.Create);
+        FileStream stream = new FileStream(Application.persistentDataPath + "/Characters/" + player.Id + ".data", FileMode.Create);
 
         PlayerData data = new PlayerData(player);
 
@@ -140,6 +139,14 @@ public class PlayerData
     public int HairColor;
     public int EyeColor;
 
+    public double Health;
+    public double Stamina;
+    public double Hunger;
+    public double Thirst;
+    public double Radiation;
+    public double Warm;
+    public double Cold;
+
     public PlayerData(Player player)
     {
         Id = player.Id;
@@ -149,6 +156,14 @@ public class PlayerData
         Hair = player.Hair;
         HairColor = player.HairColor;
         EyeColor = player.EyeColor;
+
+        Health = player.Health;
+        Stamina = player.Stamina;
+        Hunger = player.Hunger;
+        Thirst = player.Thirst;
+        Radiation = player.Radiation;
+        Warm = player.Warm;
+        Cold = player.Cold;
     }
 }
 

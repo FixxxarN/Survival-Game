@@ -11,4 +11,12 @@ public class Player
     public int Hair;
     public int HairColor;
     public int EyeColor;
+
+    public double Health;
+    public double Stamina;
+    public double Hunger;
+    public double Thirst;
+    public double Radiation;
+    public double Warm;
+    public double Cold;
 }

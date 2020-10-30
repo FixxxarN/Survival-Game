@@ -14,6 +14,14 @@ public class CharacterSelectionBox : MonoBehaviour
     public int Hair;
     public int HairColor;
 
+    public double Health;
+    public double Stamina;
+    public double Hunger;
+    public double Thirst;
+    public double Radiation;
+    public double Warm;
+    public double Cold;
+
     void Start()
     {
         
@@ -34,6 +42,7 @@ public class CharacterSelectionBox : MonoBehaviour
     public void SelectCharacter()
     {
         SceneManager.LoadScene("WorldSelection");
-        PlayerHandler.SelectPlayer(Body, SkinColor, Hair, HairColor, Name);
+        PlayerHandler.SelectPlayer(characterId, Body, SkinColor, Hair, HairColor, Name);
+        PlayerHandler.SetPlayerStats(Health, Stamina, Hunger, Thirst, Radiation, Warm, Cold);
     }
 }

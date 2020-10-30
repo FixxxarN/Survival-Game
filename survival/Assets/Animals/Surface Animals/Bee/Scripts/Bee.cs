@@ -51,7 +51,7 @@ namespace Assets.Scripts.Animals.Bugs
         {
             if (other.gameObject.name == "Player")
             {
-                other.gameObject.GetComponent<PlayerController>().Health -= 10;
+                other.gameObject.GetComponent<PlayerController>().TakeDamage(10);
                 attacking = false;
                 alive = false;
             }

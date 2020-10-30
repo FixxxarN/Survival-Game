@@ -2,26 +2,70 @@
 using Assets.Scripts.World;
 using Assets.Sprites.Inventory;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Health = 100f;
-    public float Hunger = 100f;
-    public float Thirst = 100f;
-    public float Radiation = 100f;
-    public float Cold = 100f;
-    public float Warm = 100f;
+    private double health;
+
+    public double Health
+    {
+        get { return health; }
+    }
+
+    private double stamina;
+
+    public double Stamina
+    {
+        get { return stamina; }
+    }
+
+    private double hunger;
+
+    public double Hunger
+    {
+        get { return hunger; }
+    }
+
+    private double thirst;
+
+    public double Thirst
+    {
+        get { return thirst; }
+    }
+
+    private double radiation;
+
+    public double Radiation
+    {
+        get { return radiation; }
+    }
+
+    private double warm;
+
+    public double Warm
+    {
+        get { return warm; }
+    }
+
+    private double cold;
+
+    public double Cold
+    {
+        get { return cold; }
+    }
 
     public Image HealthBar;
-    public Image HungerhBar;
+    public Image StaminaBar;
+    public Image HungerBar;
     public Image ThirstBar;
     public Image RadiationBar;
     public Image WarmBar;
     public Image ColdBar;
+
+    //Should be in an arm class
+    public Sprite ArmSprite;
 
     public float movementSpeed = 5f;
     public float jumpHeight = 5f;
@@ -61,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Ground" && other.relativeVelocity.y > 10)
         {
-            Health -= other.relativeVelocity.y * rigidbody.gravityScale * 1.5f;
+            health -= other.relativeVelocity.y * rigidbody.gravityScale * 1.5f;
         }
     }
 
@@ -117,10 +161,26 @@ public class PlayerController : MonoBehaviour
             new Vector2(-0.052f, 0.384f)
         };
         GameObject hair = GameObject.Find("Hair");
-        hair.GetComponent<SpriteRenderer>().sprite = Hairs[PlayerHandler.Hair];
+
         hair.GetComponent<SpriteRenderer>().color = hairColors[PlayerHandler.HairColor];
         hair.GetComponent<Transform>().localPosition = HairPositions[PlayerHandler.Hair];
+        hair.GetComponent<SpriteRenderer>().sprite = Hairs[PlayerHandler.Hair];
         GetComponent<SpriteRenderer>().color = skinColors[PlayerHandler.SkinColor];
+        SetStats();
+
+        InvokeRepeating("IncreaseHunger", 10f, 10f);
+        InvokeRepeating("IncreaseThirst", 5f, 5f);
+    }
+
+    private void SetStats()
+    {
+        health = PlayerHandler.Health;
+        stamina = PlayerHandler.Stamina;
+        hunger = PlayerHandler.Hunger;
+        thirst = PlayerHandler.Thirst;
+        radiation = PlayerHandler.Radiation;
+        warm = PlayerHandler.Warm;
+        cold = PlayerHandler.Cold;
     }
 
     void FixedUpdate()
@@ -141,6 +201,33 @@ public class PlayerController : MonoBehaviour
         Throw();
         UpdateStats();
         UseItem();
+        SetAnimatorFacingRight();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TakeDamage(10);
+        }
+    }
+
+    private void IncreaseHunger()
+    {
+        if(hunger > 0)
+            hunger -= 1;
+    }
+
+    private void IncreaseThirst()
+    {
+        if(thirst > 0)
+            thirst -= 1;
+    }
+
+    private void SetAnimatorFacingRight()
+    {
+        if (gameObject.transform.localScale.x > 0)
+            anim.SetBool("FacingRight", true);
+        else
+            anim.SetBool("FacingRight", false);
+
+
     }
 
     private void UseItem()
@@ -151,7 +238,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Thirst += hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.Thirst;
+                    thirst += hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.Thirst;
                     hotbar.selectedSlot.GetComponent<Slot>().UseItem();
                 }
             }
@@ -160,12 +247,13 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateStats()
     {
-        HealthBar.GetComponent<RectTransform>().localScale = new Vector3(Health / 100, 1, 1);
-        HungerhBar.GetComponent<RectTransform>().localScale = new Vector3(Hunger / 100, 1, 1);
-        ThirstBar.GetComponent<RectTransform>().localScale = new Vector3(Thirst / 100, 1, 1);
-        RadiationBar.GetComponent<RectTransform>().localScale = new Vector3(Radiation / 100, 1, 1);
-        WarmBar.GetComponent<RectTransform>().localScale = new Vector3(Warm / 100, 1, 1);
-        ColdBar.GetComponent<RectTransform>().localScale = new Vector3(Cold / 100, 1, 1);
+        HealthBar.GetComponent<RectTransform>().localScale = new Vector3((float)Health / 100, 1, 1);
+        StaminaBar.GetComponent<RectTransform>().localScale = new Vector3((float)Stamina / 100, 1, 1);
+        HungerBar.GetComponent<RectTransform>().localScale = new Vector3((float)Hunger / 100, 1, 1);
+        ThirstBar.GetComponent<RectTransform>().localScale = new Vector3((float)Thirst / 100, 1, 1);
+        RadiationBar.GetComponent<RectTransform>().localScale = new Vector3((float)Radiation / 100, 1, 1);
+        WarmBar.GetComponent<RectTransform>().localScale = new Vector3((float)Warm / 100, 1, 1);
+        ColdBar.GetComponent<RectTransform>().localScale = new Vector3((float)Cold / 100, 1, 1);
     }
 
     private void Shoot()
@@ -174,10 +262,12 @@ public class PlayerController : MonoBehaviour
         {
             if (hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.Type == ItemType.Gun)
             {
-                if(Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     GameObject b = (GameObject)Instantiate(bullet, GameObject.Find("Equipped Item").transform.position, Quaternion.identity);
-                    b.GetComponent<Rigidbody2D>().velocity = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - b.transform.position).normalized * 5;
+                    Vector3 moveDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - b.transform.position;
+                    moveDirection.z = 0;
+                    b.GetComponent<Rigidbody2D>().AddForce(moveDirection.normalized * 800f);
                     b.GetComponent<Transform>().rotation = GameObject.Find("Equipped Item").transform.rotation;
                 }
             }
@@ -203,9 +293,12 @@ public class PlayerController : MonoBehaviour
 
     private void EquipItem()
     {
-        if(!hotbar.selectedSlot.GetComponent<Slot>().IsEmpty)
+        if (!hotbar.selectedSlot.GetComponent<Slot>().IsEmpty)
         {
-            if(hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.CanBeEquipped) {
+            if (hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.CanBeEquipped)
+            {
+                GameObject.Find("Arm").GetComponent<SpriteRenderer>().sprite = ArmSprite;
+                anim.SetBool("ItemEquipped", true);
                 GameObject.Find("Equipped Item").GetComponent<SpriteRenderer>().sprite = hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.Sprite;
                 GameObject.Find("Equipped Item").gameObject.transform.localPosition = new Vector3(hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.PositionX, hotbar.selectedSlot.GetComponent<Slot>().CurrentItem.PositionY, 0f);
                 //equippedItem = (Item)Instantiate(hotbar.selectedSlot.GetComponent<Slot>().CurrenItem, GameObject.Find("arm").transform.localPosition, Quaternion.identity, GameObject.Find("arm").transform);
@@ -216,6 +309,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GameObject.Find("Arm").GetComponent<SpriteRenderer>().sprite = null;
+            anim.SetBool("ItemEquipped", false);
             GameObject.Find("Equipped Item").GetComponent<SpriteRenderer>().sprite = null;
         }
     }
@@ -285,25 +380,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+    }
+
     void Movement()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && stamina > 10)
+            {
                 rigidbody.velocity = new Vector2(-movementSpeed * 2, rigidbody.velocity.y);
+                stamina -= 0.2;
+            }
             else
+            {
                 rigidbody.velocity = new Vector2(-movementSpeed, rigidbody.velocity.y);
+                RechargeStamina();
+            }
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && stamina > 10)
+            {
                 rigidbody.velocity = new Vector2(movementSpeed * 2, rigidbody.velocity.y);
+                stamina -= 0.2;
+            }
             else
+            {
                 rigidbody.velocity = new Vector2(movementSpeed, rigidbody.velocity.y);
+                RechargeStamina();
+            }
         }
         else
         {
             rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+            RechargeStamina();
         }
 
         anim.SetFloat("Speed", Mathf.Abs(rigidbody.velocity.x));
@@ -312,6 +425,12 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(1f, 1f, 1f);
         else if (rigidbody.velocity.x < 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    private void RechargeStamina()
+    {
+        if (stamina < 100)
+            stamina += 0.1;
     }
 
     void Save()

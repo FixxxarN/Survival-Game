@@ -49,6 +49,13 @@ public class CharacterSelection : MonoBehaviour
             characterSelectionBoxClass.SkinColor = body.selectedColor;
             characterSelectionBoxClass.Hair = hair.selectedHair;
             characterSelectionBoxClass.HairColor = hair.selectedHairColor;
+            characterSelectionBoxClass.Health = character.Health;
+            characterSelectionBoxClass.Stamina = character.Stamina;
+            characterSelectionBoxClass.Hunger = character.Hunger;
+            characterSelectionBoxClass.Thirst = character.Thirst;
+            characterSelectionBoxClass.Radiation = character.Radiation;
+            characterSelectionBoxClass.Warm = character.Warm;
+            characterSelectionBoxClass.Cold = character.Cold;
             characterSelectionBox.gameObject.name = character.Name;
             i++;
         }

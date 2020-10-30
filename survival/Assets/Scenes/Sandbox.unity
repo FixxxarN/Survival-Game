@@ -1735,7 +1735,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20833333, y: 0.7708333}
+  m_Size: {x: 0.20833333, y: 0.7291667}
   m_EdgeRadius: 0
 --- !u!50 &659770375
 Rigidbody2D:
@@ -1749,7 +1749,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.16059028
+  m_Mass: 0.15190972
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
@@ -1770,12 +1770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f570cfb9f8a7dd47becefba6673b84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  Hunger: 100
-  Thirst: 56
-  Radiation: 100
-  Cold: 100
-  Warm: 100
   HealthBar: {fileID: 346019005}
   HungerhBar: {fileID: 654545261}
   ThirstBar: {fileID: 1635402760}

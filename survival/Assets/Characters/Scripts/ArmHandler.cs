@@ -5,10 +5,29 @@ using UnityEngine;
 public class ArmHandler : MonoBehaviour
 {
     private Transform transform;
+    private SpriteRenderer spriteRenderer;
+    private Color32[] SkinColors;
 
     void Start()
     {
+        SkinColors = new Color32[] {
+            new Color32(254, 253, 253, 255),
+            new Color32(245, 234, 223, 255),
+            new Color32(235, 214, 193, 255),
+            new Color32(220, 185, 149, 255),
+            new Color32(206, 155, 105, 255),
+            new Color32(190, 126, 62, 255),
+            new Color32(160, 106, 52, 255),
+            new Color32(131, 87, 43, 255),
+            new Color32(101, 67, 33, 255),
+            new Color32(86, 57, 28, 255),
+            new Color32(71, 47, 23, 255),
+            new Color32(57, 38, 19, 255)
+        };
+
         transform = GetComponent<Transform>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = SkinColors[PlayerHandler.SkinColor];
     }
 
     void Update()
