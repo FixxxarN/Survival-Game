@@ -147,6 +147,11 @@ public class PlayerData
     public double Warm;
     public double Cold;
 
+    public int Level;
+    public int XP;
+    public int Money;
+
+
     public PlayerData(Player player)
     {
         Id = player.Id;
@@ -164,6 +169,10 @@ public class PlayerData
         Radiation = player.Radiation;
         Warm = player.Warm;
         Cold = player.Cold;
+
+        Level = player.Level;
+        XP = player.XP;
+        Money = player.Money;
     }
 }
 

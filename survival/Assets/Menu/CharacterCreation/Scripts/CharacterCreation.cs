@@ -41,7 +41,10 @@ public class CharacterCreation : MonoBehaviour
             Thirst = 100,
             Radiation = 0,
             Warm = 0,
-            Cold = 0
+            Cold = 0,
+            Level = 1,
+            XP = 0,
+            Money = 0,
         };
         PlayerHandler.SelectPlayer(player.Id, body.selectedGender, player.SkinColor, player.Hair, player.HairColor, player.Name);
         PlayerHandler.SetPlayerStats(player.Health, player.Stamina, player.Hunger, player.Thirst, player.Radiation, player.Warm, player.Cold);

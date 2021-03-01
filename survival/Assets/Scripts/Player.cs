@@ -19,4 +19,8 @@ public class Player
     public double Radiation;
     public double Warm;
     public double Cold;
+
+    public int Level;
+    public int XP;
+    public int Money;
 }
